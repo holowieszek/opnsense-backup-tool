@@ -57,7 +57,7 @@ async function downloadBackup() {
         writer.on('error', reject)
     });
 }
-
+// todo: passthrough may be a better solution to reduce i/o, but let's be honest. this will be run once per day, so is it worth it? i really doubt it
 async function uploadBackup (localFilePath, s3Key) {
     const stream = createReadStream(localFilePath);
 
@@ -80,10 +80,11 @@ async function uploadBackup (localFilePath, s3Key) {
         
         console.log('The backup file has been uploaded to the AWS S3 bucket successfully.');
     } catch (e) {
+        // fine as long as running locally, something will be leaked at some point, note to future me
         if (e.response) {
             console.error('API response error', e.response.status, e.response.data)
         } else {
-            console.error('Error', e); 
+            console.error('Error', e);  
         }
     }
 })();
