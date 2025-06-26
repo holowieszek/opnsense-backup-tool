@@ -27,6 +27,7 @@ const s3 = new S3Client({
     }
 })
 
+// well, i'm lazy or stupid, it's running in the homelab anyway
 const httpsAgent = new https.Agent({
     rejectUnauthorized: false,
 });
