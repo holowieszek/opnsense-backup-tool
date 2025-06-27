@@ -1,3 +1,3 @@
 #!/bin/bash
 
-node index.mjs
+npm start
